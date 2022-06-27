@@ -1,0 +1,30 @@
+sudo apt update -y
+curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
+chmod +x ./kubectl
+sudo mv ./kubectl /usr/local/bin/kubectl
+kubectl version
+
+DOCKER INSTALLATION:
+sudo apt-get install docker.io -y
+sudo systemctl status docker
+sudo usermod -aG docker $USER && newgrp docker
+
+MINIKUBE INSTALLATION:
+curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+chmod +x minikube
+sudo mv minikube /usr/local/bin/
+minikube version
+sudo minikube start --vm-driver=none
+
+
+ERROR: X Exiting due to GUEST_MISSING_CONNTRACK: Sorry, Kubernetes 1.22.3 requires conntrack to be installed in root's path
+
+
+sudo apt-get install -y conntrack
+minikube start --vm-driver=none
+minikube status
+kubectl cluster-info 
+kubectl get events
+kubectl config view
+kubectl run hello-minikube --image=gcr.io/google_containers/echoserver:1.4 --port=8080
+kubectl get pods
